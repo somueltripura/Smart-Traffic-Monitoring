@@ -34,8 +34,9 @@ WORKDIR /app
 # Copy dependency specifications first for Docker layer caching
 COPY requirements.txt /app/requirements.txt
 
-# Install Python packages
+# Install lightweight CPU-only PyTorch first (avoids ~3GB NVIDIA CUDA packages)
 RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir torch torchvision --index-url https://download.pytorch.org/whl/cpu && \
     pip install --no-cache-dir -r requirements.txt
 
 # Copy project directories and source code

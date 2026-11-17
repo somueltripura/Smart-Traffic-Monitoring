@@ -8,6 +8,8 @@
 
 A complete, production-ready AI-powered Traffic Monitoring System designed to monitor road traffic using live camera feeds (RTSP/Webcam) or uploaded video files. The system performs real-time vehicle detection, multi-object tracking, directional vehicle counting, region-of-interest (ROI) density analysis, calibrated speed estimation, and intelligent congestion classification — presented through a futuristic dark control center web dashboard.
 
+> 🌐 **Dashboard Host URL:** [`http://localhost:5000`](http://localhost:5000) &nbsp;|&nbsp; 🩺 **Health Check:** [`http://localhost:5000/api/health`](http://localhost:5000/api/health)
+
 ---
 
 ## Table of Contents
@@ -201,18 +203,30 @@ You can build and deploy the entire system in isolated Docker containers:
 
 ### Option A: Using Docker Compose (Recommended)
 ```bash
-docker-compose up -d --build
+docker compose up -d --build
 ```
 This automatically builds the image, starts the container in the background, maps port `5000:5000`, and sets up persistent host volume mounts for `uploads/`, `logs/`, and `backend/database/`.
 
-To view logs:
+### Host Links & Service Access URLs
+
+Once the container is started, access the application and endpoints via:
+
+| Service / Endpoint | Host Link / URL | Description |
+| :--- | :--- | :--- |
+| 🖥️ **Control Dashboard** | [`http://localhost:5000`](http://localhost:5000) | Futuristic web control center & live video dashboard |
+| 🌐 **LAN / Network Access** | `http://<HOST_IP>:5000` | Access from other devices/monitors on the local network |
+| 🩺 **System Health Check** | [`http://localhost:5000/api/health`](http://localhost:5000/api/health) | Container health, ONNX model status, and worker state |
+| 🎥 **Live MJPEG Stream** | [`http://localhost:5000/api/stream/video`](http://localhost:5000/api/stream/video) | Real-time processed video feed with HUD overlays |
+| ⚡ **SSE Live Telemetry** | [`http://localhost:5000/api/stream/events`](http://localhost:5000/api/stream/events) | 2 Hz Server-Sent Events live metrics stream |
+
+To view container logs:
 ```bash
-docker-compose logs -f
+docker compose logs -f
 ```
 
 To stop the container:
 ```bash
-docker-compose down
+docker compose down
 ```
 
 ### Option B: Using Plain Docker CLI
