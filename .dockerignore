@@ -1,0 +1,32 @@
+# Git
+.git
+.gitignore
+
+# Python Bytecode & Cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual Environments
+env/
+venv/
+.venv/
+ENV/
+
+# IDE & Editor Configurations
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Tests
+tests/
+
+# Large temporary files and logs
+logs/*.log
+*.sqlite3-journal
+
+# Documentation and markdown
+*.md
